@@ -49,11 +49,18 @@ func getLabels(msg codec.Msg, err error) []*metrics.Dimension {
 	if msg.LocalAddr() != nil {
 		localAddr = getAddr(msg.LocalAddr().String())
 	}
+
 	return []*metrics.Dimension{
+		{Name: "CallerApp", Value: msg.CallerApp()},
+		{Name: "CallerServer", Value: msg.CallerServer()},
 		{Name: "CallerService", Value: msg.CallerService()},
 		{Name: "CallerMethod", Value: msg.CallerMethod()},
+
+		{Name: "CalleeApp", Value: msg.CalleeApp()},
+		{Name: "CalleeServer", Value: msg.CalleeServer()},
 		{Name: "CalleeService", Value: msg.CalleeService()},
 		{Name: "CalleeMethod", Value: msg.CalleeMethod()},
+
 		{Name: "CalleeContainerName", Value: msg.CalleeContainerName()},
 		{Name: "CalleeSetName", Value: msg.CalleeSetName()},
 		{Name: "RemoteAddr", Value: remoteAddr},

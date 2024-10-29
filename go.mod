@@ -1,4 +1,4 @@
-module trpc.group/trpc-go/trpc-metrics-prometheus
+module github.com/matrixorigin/go-metrics-prometheus
 
 go 1.18
 
