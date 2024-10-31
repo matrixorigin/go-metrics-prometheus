@@ -74,6 +74,9 @@ func ClientFilter(ctx context.Context, req, rsp interface{}, handler filter.Clie
 	begin := time.Now()
 	hErr := handler(ctx, req, rsp)
 	msg := trpc.Message(ctx)
+	if msg.CallerApp() == "gorm" {
+		return nil
+	}
 	labels := getLabels(msg, hErr)
 	ms := make([]*metrics.Metrics, 0)
 	t := float64(time.Since(begin)) / float64(time.Millisecond)
